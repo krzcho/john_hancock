@@ -16,7 +16,7 @@ module JohnHancock
         tags = []
         tags << signature_canvas(options)
         options[:hidden_id] = "#{options[:id]}-hidden" if options[:id]
-        tags << hidden_signature_field(attribute, (options[:hidden_id] || 'JohnHancock-hidden'))
+        tags << hidden_signature_field(attribute, (options[:hidden_id] || 'JohnHancock-canvas-hidden'))
         tags.join(' ').html_safe
       end
     end
