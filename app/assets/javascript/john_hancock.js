@@ -2,17 +2,21 @@
 
 document.addEventListener('DOMContentLoaded', function(){
   const elements = document.getElementsByClassName("jh-signature-canvas");
+  var signatures = [];
   if (elements) {
+    signatures = new Array(elements.length);
     for (let i = 0; i < elements.length; i++) {
       const canvas = elements[i];
       const hidden_field = document.getElementById(canvas.id + '-hidden');
     
       if (canvas && hidden_field) {
         const parent_form = canvas.closest("form");
-        const signaturePad = new SignaturePad(canvas);
+        signatures[i] = [hidden_field, new SignaturePad(canvas)];
     
         parent_form.onsubmit = function() {
-          hidden_field.value = signaturePad.toDataURL()
+          for (let j = 0; j < signatures.length; j++) {
+            signatures[j][0].value = signatures[j][1].toDataURL();
+          }
         }
     
         // function resizeCanvas() {
