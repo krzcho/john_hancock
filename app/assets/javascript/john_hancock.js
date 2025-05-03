@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', function(){
     
         parent_form.onsubmit = function() {
           for (let j = 0; j < signatures.length; j++) {
+            if (signatures[j][1].isEmpty()) {
+              elements[j].scrollIntoView();
+              return false;
+            }
             signatures[j][0].value = signatures[j][1].toDataURL();
           }
         }
