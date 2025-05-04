@@ -14,14 +14,16 @@ document.addEventListener('DOMContentLoaded', function(){
         signatures[i] = [hidden_field, new SignaturePad(canvas)];
     
         parent_form.onsubmit = function() {
-          for (let j = 0; j < signatures.length; j++) {
-            if (signatures[j][1].isEmpty()) {
-              elements[j].parentElement.style.border = '1px solid red';
-              elements[j].scrollIntoView();
-              return false;
+          if (event.submitter.value!='Popraw') {
+            for (let j = 0; j < signatures.length; j++) {
+              if (signatures[j][1].isEmpty()) {
+                elements[j].parentElement.style.border = '1px solid red';
+                elements[j].scrollIntoView();
+                return false;
+              }
+              elements[j].parentElement.style.border = '';
+              signatures[j][0].value = signatures[j][1].toDataURL();
             }
-            elements[j].parentElement.style.border = '';
-            signatures[j][0].value = signatures[j][1].toDataURL();
           }
         }
     
